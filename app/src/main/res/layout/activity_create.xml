@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/createScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:id="@+id/createLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Back 버튼 -->
+        <TextView
+            android:id="@+id/textBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Back"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_gravity="start"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Title 입력 -->
+        <EditText
+            android:id="@+id/editTitle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Set an Title"
+            android:backgroundTint="#FFEEEE"
+            android:textColorHint="#AA6666"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="12dp" />
+
+        <!-- 날짜 입력 -->
+        <EditText
+            android:id="@+id/editDate"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="July 5 2023"
+            android:backgroundTint="#FFEEEE"
+            android:textColorHint="#AA6666"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="12dp"
+            android:focusable="false" /> <!-- 날짜는 직접 입력 막기 (DatePicker 띄울 경우) -->
+
+        <!-- 내용 입력 -->
+        <EditText
+            android:id="@+id/editContent"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="Type your Thoughts"
+            android:backgroundTint="#FFEEEE"
+            android:textColorHint="#AA6666"
+            android:padding="12dp"
+            android:gravity="top"
+            android:layout_marginBottom="24dp"
+            android:inputType="textMultiLine" />
+
+        <!-- Save 버튼 -->
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Save"
+            android:textStyle="bold"
+            android:backgroundTint="#222222"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+</ScrollView>
