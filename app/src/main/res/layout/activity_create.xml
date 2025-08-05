@@ -30,30 +30,18 @@
             android:id="@+id/editTitle"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Set an Title"
+            android:hint="제목을 작성하세요"
             android:backgroundTint="#FFEEEE"
             android:textColorHint="#AA6666"
             android:layout_marginBottom="12dp"
             android:paddingStart="12dp" />
-
-        <!-- 날짜 입력 -->
-        <EditText
-            android:id="@+id/editDate"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="July 5 2023"
-            android:backgroundTint="#FFEEEE"
-            android:textColorHint="#AA6666"
-            android:layout_marginBottom="12dp"
-            android:paddingStart="12dp"
-            android:focusable="false" /> <!-- 날짜는 직접 입력 막기 (DatePicker 띄울 경우) -->
 
         <!-- 내용 입력 -->
         <EditText
             android:id="@+id/editContent"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:hint="Type your Thoughts"
+            android:hint="내용을 작성하세요"
             android:backgroundTint="#FFEEEE"
             android:textColorHint="#AA6666"
             android:padding="12dp"

@@ -56,6 +56,12 @@ public class PostCreateActivity extends AppCompatActivity {
                     Toast.makeText(PostCreateActivity.this, "게시글 등록 성공", Toast.LENGTH_SHORT).show();
                     Log.d("PostCreate", "성공: " + response.body().getPostTitle());
                 } else {
+                    try {
+                        String errorBody = response.errorBody().string();
+                        Log.e("PostCreate", "응답 실패 코드: " + response.code() + "\n에러 내용: " + errorBody);
+                    } catch (Exception e) {
+                        Log.e("PostCreate", "에러 바디 파싱 실패", e);
+                    }
                     Toast.makeText(PostCreateActivity.this, "응답 실패: " + response.code(), Toast.LENGTH_SHORT).show();
                     Log.e("PostCreate", "에러: " + response.message());
                 }
