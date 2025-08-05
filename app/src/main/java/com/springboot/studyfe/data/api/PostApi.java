@@ -1,9 +1,12 @@
 package com.springboot.studyfe.data.api;
 
-import android.telecom.Call;
 
 import com.springboot.studyfe.data.dto.PostRequestDto;
 import com.springboot.studyfe.data.dto.PostResponseDto;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 public interface PostApi {
 
