@@ -13,6 +13,7 @@ import com.springboot.studyfe.data.api.PostApi;
 import com.springboot.studyfe.data.api.RetrofitClient;
 import com.springboot.studyfe.data.dto.PostRequestDto;
 import com.springboot.studyfe.data.dto.PostResponseDto;
+import com.springboot.studyfe.data.entity.Board;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,14 +48,15 @@ public class PostCreateActivity extends AppCompatActivity {
             return;
         }
 
-        PostRequestDto dto = new PostRequestDto(userId, title, content);
+        Board requestBoard = new Board(userId, title, content);
 
-        postApi.createPost(dto).enqueue(new Callback<PostResponseDto>() {
+        postApi.createPost(requestBoard).enqueue(new Callback<Board>() {
             @Override
-            public void onResponse(Call<PostResponseDto> call, Response<PostResponseDto> response) {
+            public void onResponse(Call<Board> call, Response<Board> response) {
                 if (response.isSuccessful()) {
+                    Board responseBoard = response.body();
                     Toast.makeText(PostCreateActivity.this, "게시글 등록 성공", Toast.LENGTH_SHORT).show();
-                    Log.d("PostCreate", "성공: " + response.body().getPostTitle());
+                    Log.d("PostCreate", "성공: " + responseBoard.getPostTitle());
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
@@ -63,12 +65,11 @@ public class PostCreateActivity extends AppCompatActivity {
                         Log.e("PostCreate", "에러 바디 파싱 실패", e);
                     }
                     Toast.makeText(PostCreateActivity.this, "응답 실패: " + response.code(), Toast.LENGTH_SHORT).show();
-                    Log.e("PostCreate", "에러: " + response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<PostResponseDto> call, Throwable t) {
+            public void onFailure(Call<Board> call, Throwable t) {
                 Toast.makeText(PostCreateActivity.this, "통신 오류", Toast.LENGTH_SHORT).show();
                 Log.e("PostCreate", "실패", t);
             }

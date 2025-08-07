@@ -10,6 +10,7 @@ import com.springboot.studyfe.R;
 import com.springboot.studyfe.data.api.PostApi;
 import com.springboot.studyfe.data.api.RetrofitClient;
 import com.springboot.studyfe.data.dto.PostResponseDto;
+import com.springboot.studyfe.data.entity.Board;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,12 +39,12 @@ public class PostDetailActivity extends AppCompatActivity {
 
         postApi = RetrofitClient.getInstance().create(PostApi.class);
 
-        Call<PostResponseDto> call = postApi.getPostById(postId);
-        call.enqueue(new Callback<PostResponseDto>() {
+        Call<Board> call = postApi.getPostById(postId);
+        call.enqueue(new Callback<Board>() {
             @Override
-            public void onResponse(Call<PostResponseDto> call, Response<PostResponseDto> response) {
-                if (response.isSuccessful()) {
-                    PostResponseDto post = response.body();
+            public void onResponse(Call<Board> call, Response<Board> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Board post = response.body();
                     textTitle.setText(post.getPostTitle());
                     textContent.setText(post.getPostContent());
                     textCreatedAt.setText("작성일: " + post.getCreatedAt());
@@ -53,7 +54,7 @@ public class PostDetailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<PostResponseDto> call, Throwable t) {
+            public void onFailure(Call<Board> call, Throwable t) {
                 Toast.makeText(PostDetailActivity.this, "서버 오류 발생", Toast.LENGTH_SHORT).show();
             }
         });

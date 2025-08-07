@@ -12,6 +12,7 @@ import com.springboot.studyfe.R;
 import com.springboot.studyfe.data.api.PostApi;
 import com.springboot.studyfe.data.api.RetrofitClient;
 import com.springboot.studyfe.data.dto.PostResponseDto;
+import com.springboot.studyfe.data.entity.Board;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PostListActivity extends AppCompatActivity {
+
     private ListView listView;
     private ArrayAdapter<String> adapter;
     private List<String> postTitles = new ArrayList<>();
@@ -29,7 +31,7 @@ public class PostListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home); // listView는 activity_main.xml에 있어야 함
 
         listView = findViewById(R.id.postListView);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, postTitles);
@@ -37,13 +39,15 @@ public class PostListActivity extends AppCompatActivity {
 
         postApi = RetrofitClient.getInstance().create(PostApi.class);
 
-        Call<List<PostResponseDto>> call = postApi.getAllPosts();
-        call.enqueue(new Callback<List<PostResponseDto>>() {
+        Call<List<Board>> call = postApi.getAllPosts();
+        call.enqueue(new Callback<List<Board>>() {
             @Override
-            public void onResponse(Call<List<PostResponseDto>> call, Response<List<PostResponseDto>> response) {
-                if (response.isSuccessful()) {
-                    for (PostResponseDto post : response.body()) {
-                        postTitles.add(post.getPostTitle() + " - " + post.getCreatedAt());
+            public void onResponse(Call<List<Board>> call, Response<List<Board>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    for (Board board : response.body()) {
+                        String title = board.getPostTitle();
+                        String createdAt = board.getCreatedAt() != null ? board.getCreatedAt() : "날짜 없음";
+                        postTitles.add(title + " - " + createdAt);
                     }
                     adapter.notifyDataSetChanged();
                 } else {
@@ -52,7 +56,7 @@ public class PostListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<PostResponseDto>> call, Throwable t) {
+            public void onFailure(Call<List<Board>> call, Throwable t) {
                 Toast.makeText(PostListActivity.this, "서버 요청 실패", Toast.LENGTH_SHORT).show();
                 Log.e("PostListActivity", "오류: " + t.getMessage());
             }
